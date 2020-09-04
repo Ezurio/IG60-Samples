@@ -1,0 +1,4 @@
+greengo.yaml
+deploy/*
+.gg/*
+*.zip

@@ -1,0 +1,18 @@
+{
+  "bl654_port": "/dev/ttyS2",
+  "baudrate_str": "921600",
+  "sb_app": "smp",
+  "sb_app_folder": "./sb_smp/",
+  "sb_at": [
+    "at+cfg 213 1",
+    "at+cfg 216 27",
+    "at+cfg 211 247",
+    "at+cfg 212 247",
+    "atz"
+  ],
+  "decision": {
+    "targets": [],
+    "max_con": 1
+  },
+  "binary_format": false
+}

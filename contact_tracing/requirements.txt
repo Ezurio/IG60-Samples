@@ -1,0 +1,7 @@
+cbor
+construct 
+asyncio
+aioserial
+crcmod
+requests
+greengrasssdk
