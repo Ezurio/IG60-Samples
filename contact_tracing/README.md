@@ -92,7 +92,7 @@ In IoT Core, find your Greengrass Group
 - Edit the Lambda configuration
   - use ggc_user/ggc_group and Greengrass Container
   - Make the Lambda Long lived and keep running indefinitely
-  - If you are using an LTE modem, set an environment variable "DBUS_SYSTEM_BUS_ADDRESS" with the value "unix:abstract=__dbus_proxy_socket__" to enable access to the Ofono D-Bus APIs
+  - If you are using an LTE modem, set an environment variable "DBUS_SYSTEM_BUS_ADDRESS" with the value "unix:abstract=\_\_dbus\_proxy\_socket\_\_" to enable access to the Ofono D-Bus APIs
 
 Add a local resource - Explicitly enable access to the BL654
 
