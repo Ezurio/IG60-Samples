@@ -45,11 +45,12 @@ class Telem():
 
 
 class IoTCoreMqttClient(Telem):
-    def __init__(self):
+    def __init__(self, id = None):
         super().__init__()
         import greengrasssdk
         self.client = greengrasssdk.client('iot-data')
         self.logger = logging.getLogger(__name__)
+        self.id = id or '000000000000000'
 
     def status(self, payload):
         resp = {"status": payload}
@@ -68,10 +69,15 @@ class IoTCoreMqttClient(Telem):
         resp = DataLog(payload).serialize()
         self.client.publish(topic=topic, payload=resp)
 
+    def publish_mg100(self, payload, dev_id):
+        topic = f"mg100-ct/dev/gw/{self.id}/up"
+        resp = DataLog(payload).encode_mg100()
+        self.client.publish(topic=topic, payload=resp)
 
 class LocalPrint(Telem):
-    def __init__(self):
+    def __init__(self, id = None):
         super().__init__()
+        self.id = id or '000000000000000'
 
     def status(self, payload):
         resp = {"status": payload}
@@ -89,4 +95,9 @@ class LocalPrint(Telem):
     def publish_json(self, payload, dev_id):
         topic = self.telem_topic + f"/json/{dev_id}"
         resp = DataLog(payload).serialize()
+        prYellow("tag topic: {}, payload: {}".format(topic, resp))
+
+    def publish_mg100(self, payload, dev_id):
+        topic = f"mg100-ct/dev/gw/{self.id}/up"
+        resp = DataLog(payload).encode_mg100()
         prYellow("tag topic: {}, payload: {}".format(topic, resp))

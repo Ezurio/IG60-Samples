@@ -84,7 +84,7 @@ This can be done manually from the AWS Console.
 
 ## Deploy Lambda Function
 
-For detiailed steps, see Laird documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
+For detailed steps, see Laird documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
 
 In IoT Core, find your Greengrass Group
 
@@ -92,6 +92,7 @@ In IoT Core, find your Greengrass Group
 - Edit the Lambda configuration
   - use ggc_user/ggc_group and Greengrass Container
   - Make the Lambda Long lived and keep running indefinitely
+  - If you are using an LTE modem, set an environment variable "DBUS_SYSTEM_BUS_ADDRESS" with the value "unix:abstract=__dbus_proxy_socket__" to enable access to the Ofono D-Bus APIs
 
 Add a local resource - Explicitly enable access to the BL654
 
@@ -106,7 +107,7 @@ Add a local resource - Explicitly enable access to the BL654
 Add a subscription
 
 - From the lambda to IoT Cloud
-- topic is "laird/ig60/#"
+- topic is "laird/ig60/#" or "mg100-ct/#" for "mg100" format
 
 Settings
 

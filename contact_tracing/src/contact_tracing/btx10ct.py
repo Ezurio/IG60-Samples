@@ -28,8 +28,8 @@ class Bt510Ct():
     bin_format = False
 
     @classmethod
-    def set_bin_format(cls, val: bool):
-        cls.bin_format = val
+    def set_payload_format(cls, val: str):
+        cls.payload_format = val
 
     @classmethod
     def set_client(cls, client):
@@ -64,10 +64,12 @@ class Bt510Ct():
     async def _publish(self):
         if self.file_data:
             logger.debug("publish")
-            if Bt510Ct.bin_format:
-                Bt510Ct.client.publish_b64(self.file_data, self.mac)
-            else:
+            if Bt510Ct.payload_format == "json":
                 Bt510Ct.client.publish_json(self.file_data, self.mac)
+            elif Bt510Ct.payload_format == "mg100":
+                Bt510Ct.client.publish_mg100(self.file_data, self.mac)
+            else:
+                Bt510Ct.client.publish_b64(self.file_data, self.mac)
 
     async def _connect(self):
         handle: str = None

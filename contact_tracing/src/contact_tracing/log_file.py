@@ -11,6 +11,7 @@ import crcmod.predefined
 import json
 import struct
 import timeit
+import time
 import logging
 logger = logging.getLogger(__name__)
 
@@ -154,6 +155,12 @@ class CtLogHeader():
 
         return verify_crc(reported, data[:47])
 
+    def get_publish_hdr(self) -> bytes:
+        return (struct.pack('<H', self.ct_1.entry_protocol_version) +
+            binascii.unhexlify(self.ct_1.device_id) +
+            struct.pack('<II', int(time.time()), self.ct_1.last_upload) +
+            binascii.unhexlify(self.ct_2.fw_version) +
+            struct.pack('<BH', self.ct_2.battery_level, self.ct_2.network_id))
 
 class EntryHeader():
     def __init__(self, data: bytes, file_index: int):
@@ -299,11 +306,11 @@ class DataLog():
             raise ValueError("data size must be greater than header size")
         self.header = CtLogHeader(data[:CT_LOG_HEADER_SIZE])
         self.entries = []
-        entry_data = data[CT_LOG_HEADER_SIZE:]
+        self.entry_data = data[CT_LOG_HEADER_SIZE:]
         i = 0
         file_index = CT_LOG_HEADER_SIZE
-        while i < len(entry_data):
-            ent = Entry(entry_data[i:], file_index)
+        while i < len(self.entry_data):
+            ent = Entry(self.entry_data[i:], file_index)
             i += ent.get_offset()
             file_index = i + CT_LOG_HEADER_SIZE
             self.entries.append(ent)
@@ -311,6 +318,8 @@ class DataLog():
     def serialize(self, indent=None) -> str:
         return json.dumps(self, cls=JsonEncoder, indent=indent)
 
+    def encode_mg100(self) -> bytes:
+        return self.header.get_publish_hdr() + self.entry_data
 
 class JsonEncoder(json.JSONEncoder):
     """ custom JSON encoder for DataLog  """

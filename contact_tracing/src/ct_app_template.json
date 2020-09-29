@@ -14,5 +14,5 @@
     "targets": [],
     "max_con": 1
   },
-  "binary_format": false
+  "payload_format": "json"
 }
