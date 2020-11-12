@@ -12,6 +12,7 @@ import binascii
 import struct
 import asyncio
 import aioserial
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,16 @@ APP_CMD = 'AT+RUN \"atcmd\"'
 
 BT_SCAN_FORMAT = 'AT+SFMT 1'
 BT_SCAN_CMD = 'AT+LSCN {},\"\\FF\\77\\00\\01\"'
+
+SREG_SET_CMD = 'AT S{}={}'
+SREG_STORE_CMD = 'AT&W'
+
+RESET_CMD = 'ATZ\r'
+
+SREGISTER_VALUES = [
+    (211, 80),  # Scan interval
+    (212, 80)   # Scan window
+]
 
 def parse_bt510_data(mac, rssi, data):
     # Refer to the BT510 User Guide for details on the advertisement format
@@ -96,6 +107,18 @@ async def task_main(port, baudrate, client):
     await cmd(inst, APP_CMD)
     # App doesn't respond until first input
     await cmd(inst, '')
+    # Configure S-registers
+    for srec in SREGISTER_VALUES:
+        await cmd(inst, SREG_SET_CMD.format(srec[0], srec[1]))
+    await cmd(inst, SREG_STORE_CMD)
+    # Reset (no response)
+    await inst.write_async(RESET_CMD.encode())
+    # Wait for module to reboot
+    time.sleep(2)
+    # Start app again
+    await cmd(inst, APP_CMD)
+    await cmd(inst, '')
+    # Start the scanning task
     asyncio.create_task(scan_and_filter(inst, client))
     while True:
         ## this will allow developers to have a responsive ctr-C

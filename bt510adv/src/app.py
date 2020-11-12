@@ -37,7 +37,7 @@ def handler():
 if __name__ == "__main__":
     logging.basicConfig(
         format='%(asctime)s  %(levelname)s  %(filename)s - %(message)s',
-        level=logging.INFO)
+        level=logging.DEBUG)
 else:
     logging.basicConfig(
         format='%(asctime)s  %(levelname)s  %(filename)s - %(message)s',
