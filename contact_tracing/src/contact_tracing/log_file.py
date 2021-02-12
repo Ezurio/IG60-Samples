@@ -326,4 +326,6 @@ class JsonEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Entry):
             return {"header": obj.entry_header, "records": obj.records}
-        return obj.__dict__
+        d = obj.__dict__
+        d.pop('entry_data', None)
+        return d
