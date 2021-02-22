@@ -11,6 +11,7 @@ import json
 import logging
 import base64
 from contact_tracing.log_file import DataLog
+from contact_tracing.tracker_log import CtFile
 
 MQTT_BASE = "example/"
 
@@ -64,9 +65,14 @@ class IoTCoreMqttClient(Telem):
         resp = {"payload": s_payload}
         self.client.publish(topic=topic, payload=json.dumps(resp))
 
-    def publish_json(self, payload, dev_id):
+    def publish_json_legacy(self, payload, dev_id):
         topic = self.telem_topic + f"/json/{dev_id}"
         resp = DataLog(payload).serialize()
+        self.client.publish(topic=topic, payload=resp)
+
+    def publish_json(self, payload, dev_id):
+        topic = self.telem_topic + f"/json/{dev_id}"
+        resp = CtFile(payload).serialize()
         self.client.publish(topic=topic, payload=resp)
 
     def publish_mg100(self, payload, dev_id):

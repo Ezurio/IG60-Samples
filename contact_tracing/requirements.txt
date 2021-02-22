@@ -1,6 +1,5 @@
 cbor
 construct 
-asyncio
 aioserial
 crcmod
 requests

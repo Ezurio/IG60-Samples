@@ -14,6 +14,7 @@ import logging
 from .smp import SmpFileResp
 import os
 import time
+import binascii
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +67,8 @@ class Bt510Ct():
             logger.debug("publish")
             if Bt510Ct.payload_format == "json":
                 Bt510Ct.client.publish_json(self.file_data, self.mac)
+            elif Bt510Ct.payload_format == "json_legacy":
+                Bt510Ct.client.publish_json_legacy(self.file_data, self.mac)
             elif Bt510Ct.payload_format == "mg100":
                 Bt510Ct.client.publish_mg100(self.file_data, self.mac)
             else:
@@ -113,6 +116,7 @@ class Bt510Ct():
                 if file.data(data):
                     if file.is_complete():
                         self.file_data = file.read()
+                        logger.debug('file data: {}'.format(self.file_data.hex()))
                         break
                     else:
                         temp = file.get_cmd(self.conn_handle)
