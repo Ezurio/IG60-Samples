@@ -1,7 +1,9 @@
 #
 # modem.py
 #
-# Modem API for Laird Sentrius IG60 devices
+# Modem API for Sentrius IG60 devices
+#
+# copyright (c) 2024 Ezurio LLC.
 #
 import dbus
 import dbus.exceptions

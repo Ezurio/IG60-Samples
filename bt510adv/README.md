@@ -2,9 +2,6 @@
 
 This repo contains an example application for the Sentrius IG60 Greengrass, that will scan for and decode advertisement packets from BT510 sensors and forward them to AWS IoT.
 
-[Sentrius IG60 Gateway](https://www.lairdconnect.com/iot-devices/iot-gateways/sentrius-ig60-serial-and-ig60-serial-lte-wireless-iot-gateways) |
-[BT510 Sensor](https://www.lairdconnect.com/iot-devices/iot-sensors/bt510-bluetooth-5-long-range-ip67-multi-sensor)
-
 ## Required Hardware
 
 - **Sentrius IG60 Greengrass with internal BL654**
@@ -43,7 +40,7 @@ This can be done manually from the AWS Console.
 
 ## Deploy the Lambda Function
 
-For detailed steps, see Laird documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
+For detailed steps, see the IG60 documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
 
 In IoT Core, find your Greengrass Group
 
@@ -64,11 +61,11 @@ Add a local resource to enable access to the BL654 device from the containerized
 Add a subscription
 
 - From the lambda to IoT Cloud
-- Set the topic as "laird/ig60/+/bt510/#"
+- Set the topic as "summit/ig60/+/bt510/#"
 
 The Lambda will publiish to this topic using the IG60 "Thing Name" and BT510 MAC address, for example:
 ```
-laird/ig60/MyIG60ThingName/bt510/json/01E8B7601E37D1
+summit/ig60/MyIG60ThingName/bt510/json/01E8B7601E37D1
 ```
 
 Settings
@@ -78,4 +75,4 @@ Settings
 - Provide permissions to write to CloudWatch logs
 
 ## Notes
-This Lambda deploys a pre-built version of the smartBASIC AT Command application for BLE.  You can find the source in the [BL654 Applications repository](https://github.com/LairdCP/BL654-Applications).  There is also [documentation on the BL654 product page](https://www.lairdconnect.com/documentation/user-guide-bl65x-interface-application).
+This Lambda deploys a pre-built version of the smartBASIC AT Command application for BLE.  You can find the source in the [BL654 Applications repository](https://github.com/Ezurio/BL654-Applications).  There is also [documentation on the BL654 product page](https://www.lairdconnect.com/documentation/user-guide-bl65x-interface-application).

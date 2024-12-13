@@ -1,5 +1,5 @@
 #
-# copyright (c) 2020 Laird Connectivity
+# copyright (c) 2024 Ezurio LLC.
 #
 # SPDX-License-Identifier: Apache-2.0
 # This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
@@ -33,10 +33,10 @@ def prYellow(skk):
 class Telem():
     def __init__(self):
         self.telem_topic = os.getenv(
-            'MQTT_TELEM_TOPIC') or "laird/ig60/{}/ct/data".format(NODE_ID)
+            'MQTT_TELEM_TOPIC') or "summit/ig60/{}/ct/data".format(NODE_ID)
 
         self.status_topic = os.getenv(
-            'MQTT_STATUS_TOPIC') or "laird/ig60/{}/ct/status".format(NODE_ID)
+            'MQTT_STATUS_TOPIC') or "summit/ig60/{}/ct/status".format(NODE_ID)
 
     def register_status_topic(self, topic):
         self.status_topic = topic

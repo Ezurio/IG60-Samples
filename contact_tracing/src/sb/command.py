@@ -1,5 +1,5 @@
 #
-# copyright (c) 2020 Laird Connectivity
+# copyright (c) 2024 Ezurio LLC.
 #
 # SPDX-License-Identifier: Apache-2.0
 # This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR

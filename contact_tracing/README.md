@@ -2,13 +2,6 @@
 
 This repo contains an example application for the Sentrius IG60 Greengrass. This example will scan, find, and connect to BT710 sensors. Then download contact tracing data, parse and send to AWS Iot Core.
 
-[Sentrius IG60 Gateway](https://www.lairdconnect.com/iot-devices/iot-gateways/sentrius-ig60-serial-and-ig60-serial-lte-wireless-iot-gateways) |
-[BT710 Sensor](https://www.lairdconnect.com/iot-devices/iot-sensors/sentrius-bt7x0-tracker-multi-sensor)
-
-![BT710](https://connectivity-staging.s3.us-east-2.amazonaws.com/styles/product_thumbnail/s3/2020-06/BT710-Bluetooth-Covid-Tracker-Hero.png?itok=B_CPNI4N)
-
-![IG60](https://connectivity-staging.s3.us-east-2.amazonaws.com/styles/product_thumbnail/s3/2020-01/ig60-transparent.png?itok=QTTqtco4)
-
 ```
                        XXXXX
                      XXX   XXX
@@ -48,7 +41,7 @@ This repo contains an example application for the Sentrius IG60 Greengrass. This
 ## Required Hardware
 
 - **Sentrius IG60 Greengrass with internal BL654**
-- **Sentrius IG60 Laird Linux with internal BL654** - it is also possible, but Greengrass must be installed
+- **Sentrius IG60 Summit Linux with internal BL654** - it is also possible, but Greengrass must be installed
 - **Sentrus IG60 Serial** - this is possible, but you must have a BL654 (451-0003) USB inserted
 - **BT710** Sensor or **BT510CT** sensor
 
@@ -84,7 +77,7 @@ This can be done manually from the AWS Console.
 
 ## Deploy Lambda Function
 
-For detailed steps, see Laird documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
+For detailed steps, see the IG60 documentation [Deploy step](https://documentation.lairdconnect.com/Builds/IG60-SERIAL-GREENGRASS/latest/Content/Topics/5%20-%20Using%20the%20Device/Greengrass%20Getting%20Started/Configure%20Greengrass%20Deployment.htm)
 
 In IoT Core, find your Greengrass Group
 
@@ -107,7 +100,7 @@ Add a local resource - Explicitly enable access to the BL654
 Add a subscription
 
 - From the lambda to IoT Cloud
-- topic is "laird/ig60/#" or "mg100-ct/#" for "mg100" format
+- topic is "summit/ig60/#" or "mg100-ct/#" for "mg100" format
 
 Settings
 
