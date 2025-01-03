@@ -75,4 +75,4 @@ Settings
 - Provide permissions to write to CloudWatch logs
 
 ## Notes
-This Lambda deploys a pre-built version of the smartBASIC AT Command application for BLE.  You can find the source in the [BL654 Applications repository](https://github.com/Ezurio/BL654-Applications).  There is also [documentation on the BL654 product page](https://www.lairdconnect.com/documentation/user-guide-bl65x-interface-application).
+This Lambda deploys a pre-built version of the smartBASIC AT Command application for BLE.  You can find the source in the [BL654 Applications repository](https://github.com/LairdCP/BL654-Applications).  There is also [documentation on the BL654 product page](https://www.ezurio.com/documentation/user-guide-bl65x-interface-application).
